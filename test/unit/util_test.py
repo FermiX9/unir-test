@@ -22,3 +22,15 @@ class TestUtil(unittest.TestCase):
         self.assertRaises(TypeError, util.convert_to_number, "s")
         self.assertRaises(TypeError, util.convert_to_number, None)
         self.assertRaises(TypeError, util.convert_to_number, object())
+    
+    def test_invalid_convert_to_number(self):
+        self.assertRaises(TypeError, util.InvalidConvertToNumber, "NaN")
+        self.assertRaises(TypeError, util.InvalidConvertToNumber, "Infinity")
+        self.assertRaises(TypeError, util.InvalidConvertToNumber, "-Infinity")
+        self.assertRaises(TypeError, util.InvalidConvertToNumber, "3.4.5")
+    
+    def test_validate_permissions(self):
+        self.assertTrue(util.validate_permissions("add", "user1"))
+        self.assertFalse(util.validate_permissions("add", "user2"))
+    
+
