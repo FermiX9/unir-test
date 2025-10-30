@@ -20,10 +20,6 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.add(-2, 2))
         self.assertEqual(1, self.calc.add(1, 0))
 
-    def test_divide_method_returns_correct_result(self):
-        self.assertEqual(1, self.calc.divide(2, 2))
-        self.assertEqual(1.5, self.calc.divide(3, 2))
-
     def test_add_method_fails_with_nan_parameter(self):
         self.assertRaises(TypeError, self.calc.add, "2", 2)
         self.assertRaises(TypeError, self.calc.add, 2, "2")
@@ -32,6 +28,25 @@ class TestCalculate(unittest.TestCase):
         self.assertRaises(TypeError, self.calc.add, 2, None)
         self.assertRaises(TypeError, self.calc.add, object(), 2)
         self.assertRaises(TypeError, self.calc.add, 2, object())
+    
+    def test_substract_method_returns_correct_result(self):
+        self.assertEqual(0, self.calc.substract(2, 2))
+        self.assertEqual(4, self.calc.substract(2, -2))
+        self.assertEqual(-4, self.calc.substract(-2, 2))
+        self.assertEqual(1, self.calc.substract(1, 0))
+    
+    def test_substract_method_fails_with_nan_parameter(self):
+        self.assertRaises(TypeError, self.calc.substract, "2", 2)
+        self.assertRaises(TypeError, self.calc.substract, 2, "2")
+        self.assertRaises(TypeError, self.calc.substract, "2", "2")
+        self.assertRaises(TypeError, self.calc.substract, None, 2)
+        self.assertRaises(TypeError, self.calc.substract, 2, None)
+        self.assertRaises(TypeError, self.calc.substract, object(), 2)
+        self.assertRaises(TypeError, self.calc.substract, 2, object())
+
+    def test_divide_method_returns_correct_result(self):
+        self.assertEqual(1, self.calc.divide(2, 2))
+        self.assertEqual(1.5, self.calc.divide(3, 2))
 
     def test_divide_method_fails_with_nan_parameter(self):
         self.assertRaises(TypeError, self.calc.divide, "2", 2)
@@ -50,7 +65,58 @@ class TestCalculate(unittest.TestCase):
         self.assertEqual(0, self.calc.multiply(1, 0))
         self.assertEqual(0, self.calc.multiply(-1, 0))
         self.assertEqual(-2, self.calc.multiply(-1, 2))
-
+    
+    def test_multiply_method_fails_with_nan_parameter(self):
+        self.assertRaises(TypeError, self.calc.multiply, "2", 2)
+        self.assertRaises(TypeError, self.calc.multiply, 2, "2")
+        self.assertRaises(TypeError, self.calc.multiply, "2", "2")
+        self.assertRaises(TypeError, self.calc.multiply, None, 2)
+        self.assertRaises(TypeError, self.calc.multiply, 2, None)
+        self.assertRaises(TypeError, self.calc.multiply, object(), 2)
+        self.assertRaises(TypeError, self.calc.multiply, 2, object())
+    
+    
+    def test_power_method_returns_correct_result(self):
+        self.assertEqual(8, self.calc.power(2, 3))
+        self.assertEqual(1, self.calc.power(5, 0))
+        self.assertEqual(0.25, self.calc.power(2, -2))
+    
+    def test_power_method_fails_with_nan_parameter(self):
+        self.assertRaises(TypeError, self.calc.power, "2", 2)
+        self.assertRaises(TypeError, self.calc.power, 2, "2")
+        self.assertRaises(TypeError, self.calc.power, "2", "2")
+        self.assertRaises(TypeError, self.calc.power, None, 2)
+        self.assertRaises(TypeError, self.calc.power, 2, None)
+        self.assertRaises(TypeError, self.calc.power, object(), 2)
+        self.assertRaises(TypeError, self.calc.power, 2, object())
+    
+    def test_sqrt_method_returns_correct_result(self):
+        self.assertEqual(4, self.calc.sqrt(16))
+        self.assertEqual(0, self.calc.sqrt(0))
+        self.assertEqual(2.5, self.calc.sqrt(6.25))
+    
+    def test_sqrt_method_fails_with_nan_parameter(self):
+        self.assertRaises(TypeError, self.calc.sqrt, "16")
+        self.assertRaises(TypeError, self.calc.sqrt, None)
+        self.assertRaises(TypeError, self.calc.sqrt, object())
+    
+    def test_sqrt_method_fails_with_negative_parameter(self):
+        self.assertRaises(TypeError, self.calc.sqrt, -16)
+        self.assertRaises(TypeError, self.calc.sqrt, -0.01)
+    
+    def test_logarithm_method_returns_correct_result(self):
+        self.assertEqual(2, self.calc.logarithm(100))
+        self.assertEqual(3, self.calc.logarithm(1000))
+        self.assertAlmostEqual(1.30103, self.calc.logarithm(20), places=5)
+    
+    def test_logarithm_method_fails_with_nan_parameter(self):
+        self.assertRaises(TypeError, self.calc.logarithm, "100")
+        self.assertRaises(TypeError, self.calc.logarithm, None)
+        self.assertRaises(TypeError, self.calc.logarithm, object())
+    
+    def test_logarithm_method_fails_with_non_positive_parameter(self):
+        self.assertRaises(TypeError, self.calc.logarithm, 0)
+        self.assertRaises(TypeError, self.calc.logarithm, -10)
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
